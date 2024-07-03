@@ -59,7 +59,8 @@ O programa é relativamente simples e utiliza uma estrutura de pacotes  padrão:
 Esse é um modelo que representa as entidades do banco de dados e como elas interagem:
 
 
-![esquema_gerenciador_de_ativos](Pasted image 20240703033744.png)
+![image](https://github.com/g-bortoletto/gerenciador-ativos/assets/20934524/66720594-e8f2-4b2a-9974-7f926f3486c5)
+
 
 Acredito que o programa contempla tudo que foi pedido no nível 1 e algumas coisas do nível 2. Considerei datas desde o início, tanto saldo como posição são calculados a partir de datas, não são dados fixos guardados no banco de dados.
 
