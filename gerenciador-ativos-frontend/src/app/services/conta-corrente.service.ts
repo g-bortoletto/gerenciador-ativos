@@ -12,14 +12,14 @@ export class ContaCorrenteService {
 
   constructor(private httpClient: HttpClient) { }
 
-  consultarSaldo(): Observable<any> {
+  consultarSaldo(dataPosicao: string): Observable<any> {
     return this.httpClient
-      .get<ContaCorrente>("http://localhost:8080/api/v0/contas-corrente/1/saldo/" + new Date().toISOString());
+      .get<ContaCorrente>("http://localhost:8080/api/v0/contas-corrente/1/saldo/" + dataPosicao);
   }
 
-  consultarPosicoes(): Observable<any> {
+  consultarPosicoes(dataPosicao: string): Observable<any> {
     return this.httpClient
-      .get<Posicao[]>("http://localhost:8080/api/v0/contas-corrente/1/posicoes/" + new Date().toISOString());
+      .get<Posicao[]>("http://localhost:8080/api/v0/contas-corrente/1/posicoes/" + dataPosicao);
   }
 
 }

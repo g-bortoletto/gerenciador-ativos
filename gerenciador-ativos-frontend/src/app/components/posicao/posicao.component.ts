@@ -10,6 +10,7 @@ import { Posicao } from '../../common/posicao';
 
 export class PosicaoComponent {
 
+  public dataPosicao: string = new Date().toISOString();
   public posicoes: Posicao[] = [];
 
   constructor(public contaCorrenteService: ContaCorrenteService) {}
@@ -19,7 +20,7 @@ export class PosicaoComponent {
   }
 
   consultarPosicoes(): void {
-    this.contaCorrenteService.consultarPosicoes().subscribe({
+    this.contaCorrenteService.consultarPosicoes(this.dataPosicao).subscribe({
       next: response => { this.posicoes = response; console.log(response) },
       error: response => console.error(response),
       complete: () => console.log(this.posicoes)

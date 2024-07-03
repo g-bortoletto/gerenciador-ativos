@@ -12,6 +12,7 @@ export class ContaCorrenteComponent implements OnInit {
   public tipoLancamento: string = "ENTRADA";
   public valorLancamento: number = 0;
   public descricaoLancamento: string = "";
+  public dataPosicao: string = new Date().toISOString();
 
   constructor(
     private contaCorrenteService: ContaCorrenteService) {
@@ -22,7 +23,7 @@ export class ContaCorrenteComponent implements OnInit {
   }
 
   consultarSaldo(): void {
-    this.contaCorrenteService.consultarSaldo().subscribe({
+    this.contaCorrenteService.consultarSaldo(this.dataPosicao).subscribe({
       next: response => { this.contaCorrenteSaldo = response; console.log(response) },
       error: response => console.error(response),
       complete: () => console.log(this.contaCorrenteSaldo)

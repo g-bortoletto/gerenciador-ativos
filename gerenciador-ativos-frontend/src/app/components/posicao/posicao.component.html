@@ -1,10 +1,11 @@
+<div class="container" >
 <table class="table">
 
     <thead class="thead-dark">
         <tr>
-            <th></th>
             <th>NOME</th>
-            <th>QUANTIDADE</th>
+            <th>TIPO</th>
+            <th>QUANTIDADE TOTAL</th>
             <th>VALOR MERCADO</th>
             <th>RENDIMENTO</th>
             <th>LUCRO</th>
@@ -14,6 +15,7 @@
     <tbody>
         <tr *ngFor="let posicao of posicoes">
             <td class="align-middle">{{ posicao.ativoFinanceiro.nome }}</td>
+            <td class="align-middle">{{ posicao.ativoFinanceiro.tipo }}</td>
             <td class="align-middle">{{ posicao.quantidadeTotal}}</td>
             <td class="align-middle">{{ posicao.valorMercadoTotal | currency:'BRL'}}</td>
             <td class="align-middle">{{ posicao.rendimento}}</td>
@@ -22,3 +24,11 @@
 
     </tbody>
 </table>
+<div class="mb-3">
+    <label for="dataPosicaoLabel" class="form-label">Data Posição</label>
+    <input type="text" class="form-control" id="dataPosicaoLabel" placeholder="Data Posição" [(ngModel)]="dataPosicao">
+</div>
+<div class="mb-3">
+    <button (click)="consultarPosicoes()">Consultar Posições</button>
+</div>
+</div>
