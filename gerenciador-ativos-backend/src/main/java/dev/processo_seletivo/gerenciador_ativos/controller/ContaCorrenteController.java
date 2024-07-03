@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Optional;
 
@@ -42,13 +43,13 @@ public class ContaCorrenteController {
     }
 
     @GetMapping("/{id}/saldo/{data}")
-    public ResponseEntity<BigDecimal> consultarSaldoContaCorrente(@PathVariable("id") Long contaCorrenteId, @PathVariable("data") LocalDateTime dataPosicao) {
-        return ResponseEntity.ok(contaCorrenteService.consultarSaldoContaCorrente(contaCorrenteId, dataPosicao));
+    public ResponseEntity<BigDecimal> consultarSaldoContaCorrente(@PathVariable("id") Long contaCorrenteId, @PathVariable("data") String dataPosicao) {
+        return ResponseEntity.ok(contaCorrenteService.consultarSaldoContaCorrente(contaCorrenteId, LocalDateTime.parse(dataPosicao, DateTimeFormatter.ISO_DATE_TIME)));
     }
 
     @GetMapping("{id}/posicoes/{data}")
-    public ResponseEntity<List<Posicao>> consultarPosicoesContaCorrente(@PathVariable("id") Long contaCorrenteId, @PathVariable("data") LocalDateTime dataPosicao) {
-        return ResponseEntity.ok(contaCorrenteService.consultarPosicoesContaCorrente(contaCorrenteId, dataPosicao));
+    public ResponseEntity<List<Posicao>> consultarPosicoesContaCorrente(@PathVariable("id") Long contaCorrenteId, @PathVariable("data") String dataPosicao) {
+        return ResponseEntity.ok(contaCorrenteService.consultarPosicoesContaCorrente(contaCorrenteId, LocalDateTime.parse(dataPosicao, DateTimeFormatter.ISO_DATE_TIME)));
     }
 
 }

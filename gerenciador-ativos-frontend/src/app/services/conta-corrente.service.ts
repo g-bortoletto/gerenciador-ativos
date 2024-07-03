@@ -10,18 +10,16 @@ import { Lancamento } from '../common/lancamento';
 })
 export class ContaCorrenteService {
 
-  private urlBase = "http://localhost:8080/api/contas-corrente/1";
-
   constructor(private httpClient: HttpClient) { }
 
   consultarSaldo(): Observable<any> {
     return this.httpClient
-      .get<ContaCorrente>(this.urlBase + "/saldo");
+      .get<ContaCorrente>("http://localhost:8080/api/v0/contas-corrente/1/saldo/" + new Date().toISOString());
   }
 
   incluirLancamento(detalhesLancamento: Lancamento): Observable<any> {
     return this.httpClient
-      .post<ContaCorrente>(this.urlBase + "/lancamentos", detalhesLancamento);
+      .post<ContaCorrente>("http://localhost:8080/api/v0/lancamentos", detalhesLancamento);
   }
 
 }

@@ -10,7 +10,7 @@ import { Lancamento } from '../../common/lancamento';
 })
 export class ContaCorrenteComponent implements OnInit {
 
-  public contaCorrente: ContaCorrente | null = null;
+  public contaCorrenteSaldo: number = 0;
   public tipoLancamento: string = "ENTRADA";
   public valorLancamento: number = 0;
   public descricaoLancamento: string = "";
@@ -18,32 +18,16 @@ export class ContaCorrenteComponent implements OnInit {
   constructor(
     private contaCorrenteService: ContaCorrenteService) {
   }
-  
+
   ngOnInit(): void {
     this.consultarSaldo();
   }
 
   consultarSaldo(): void {
     this.contaCorrenteService.consultarSaldo().subscribe({
-        next: response => { this.contaCorrente = response; console.log(response) },
-        error: response => console.error(response),
-        complete: () => console.log(this.contaCorrente?.saldo)
+      next: response => { this.contaCorrenteSaldo = response; console.log(response) },
+      error: response => console.error(response),
+      complete: () => console.log(this.contaCorrenteSaldo)
     });
   }
-
-  incluirLancamento(): void {
-    if (this.contaCorrente != null) {
-      this.contaCorrenteService.incluirLancamento(new Lancamento(
-        this.tipoLancamento,
-        this.valorLancamento,
-        this.descricaoLancamento,
-        new Date()))
-        .subscribe({
-          next: response => console.log(response),
-          error: response => console.error(response),
-          complete: () => this.consultarSaldo()
-        });
-    }
-  }
-
 }
