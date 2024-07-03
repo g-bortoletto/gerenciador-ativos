@@ -11,7 +11,12 @@
 	</div>
 	<div class="mb-3">
 		<label for="descricao-lancamento" class="form-label">Descrição do Lançamento</label>
-		<input type="text" class="form-control" id="descricao-lancamento" [(ngModel)]="lancamento.valor"
+		<input type="text" class="form-control" id="descricao-lancamento" [(ngModel)]="lancamento.descricao"
+			[ngModelOptions]="{standalone: true}">
+	</div>
+	<div class="mb-3">
+		<label for="data-lancamento" class="form-label">Data do Lançamento</label>
+		<input type="text" class="form-control" id="data-lancamento" [(ngModel)]="lancamento.data"
 			[ngModelOptions]="{standalone: true}">
 	</div>
 	<button type="submit" class="btn btn-primary" (click)="incluirLancamento()">Incluir Lançamento</button>
