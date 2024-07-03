@@ -1,6 +1,6 @@
 package dev.processo_seletivo.gerenciador_ativos.dto;
 
-import dev.processo_seletivo.gerenciador_ativos.model.Lancamento;
+import dev.processo_seletivo.gerenciador_ativos.entity.Lancamento;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
@@ -11,6 +11,7 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 public class LancamentoDto {
 
+    private Long contaCorrenteId;
     private Lancamento.TipoLancamento tipo;
     private BigDecimal valor;
     private String descricao;

@@ -1,7 +1,7 @@
 package dev.processo_seletivo.gerenciador_ativos.service;
 
-import dev.processo_seletivo.gerenciador_ativos.model.AtivoFinanceiro;
-import dev.processo_seletivo.gerenciador_ativos.model.ValorMercado;
+import dev.processo_seletivo.gerenciador_ativos.entity.AtivoFinanceiro;
+import dev.processo_seletivo.gerenciador_ativos.entity.ValorMercado;
 import dev.processo_seletivo.gerenciador_ativos.dto.ValorMercadoDto;
 import dev.processo_seletivo.gerenciador_ativos.repository.ValorMercadoRepository;
 import org.junit.jupiter.api.BeforeEach;
@@ -15,6 +15,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -71,7 +72,7 @@ class ValorMercadoServiceUnitTest {
 
     @Test
     public void testConsultarValoresMercado() {
-        when(valorMercadoRepository.findAll()).thenReturn(Arrays.asList(valorMercado));
+        when(valorMercadoRepository.findAll()).thenReturn(Collections.singletonList(valorMercado));
 
         List<ValorMercado> result = valorMercadoService.consultarValoresMercado();
 
@@ -93,7 +94,7 @@ class ValorMercadoServiceUnitTest {
 
     @Test
     public void testConsultarValoresMercadoDeAtivo() {
-        when(valorMercadoRepository.findByAtivoFinanceiro(ativoFinanceiro)).thenReturn(Arrays.asList(valorMercado));
+        when(valorMercadoRepository.findByAtivoFinanceiro(ativoFinanceiro)).thenReturn(Collections.singletonList(valorMercado));
 
         List<ValorMercado> result = valorMercadoService.consultarValoresMercadoDeAtivo(ativoFinanceiro);
 
@@ -115,7 +116,7 @@ class ValorMercadoServiceUnitTest {
 
     @Test
     public void testConsultarValoresMercadoDeAtivoNoPeriodo() {
-        when(valorMercadoRepository.findByAtivoFinanceiro(ativoFinanceiro)).thenReturn(Arrays.asList(valorMercado));
+        when(valorMercadoRepository.findByAtivoFinanceiro(ativoFinanceiro)).thenReturn(Collections.singletonList(valorMercado));
 
         List<ValorMercado> result = valorMercadoService.consultarValoresMercadoDeAtivoNoPeriodo(ativoFinanceiro, LocalDateTime.of(2020, 1, 1, 0, 0), LocalDateTime.of(2022, 1, 1, 0, 0));
 
@@ -130,7 +131,7 @@ class ValorMercadoServiceUnitTest {
         LocalDateTime dataInvalida = LocalDateTime.of(2019, 12, 31, 0, 0);
 
         Exception exception = assertThrows(RuntimeException.class, () -> {
-            valorMercadoService.incluirValorMercadoEmAtivo(ativoFinanceiro, new ValorMercadoDto(BigDecimal.valueOf(100.0), dataInvalida));
+            valorMercadoService.incluirValorMercadoEmAtivo(ativoFinanceiro, new ValorMercadoDto(ativoFinanceiro.getId(), BigDecimal.valueOf(100.0), dataInvalida));
         });
 
         String expectedMessage = "A data do valor de mercado deve estar entre a data de emissão e a data de vencimento do ativo financeiro.";

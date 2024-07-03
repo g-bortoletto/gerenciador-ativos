@@ -1,8 +1,9 @@
 package dev.processo_seletivo.gerenciador_ativos.service;
 
-import dev.processo_seletivo.gerenciador_ativos.model.AtivoFinanceiro;
-import dev.processo_seletivo.gerenciador_ativos.model.ValorMercado;
+import dev.processo_seletivo.gerenciador_ativos.entity.AtivoFinanceiro;
+import dev.processo_seletivo.gerenciador_ativos.entity.ValorMercado;
 import dev.processo_seletivo.gerenciador_ativos.dto.ValorMercadoDto;
+import dev.processo_seletivo.gerenciador_ativos.exception.DataMovimentacaoInvalidaException;
 import dev.processo_seletivo.gerenciador_ativos.repository.ValorMercadoRepository;
 import jakarta.transaction.Transactional;
 import org.jetbrains.annotations.NotNull;
@@ -10,7 +11,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.Comparator;
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 
 @Service
@@ -55,9 +58,23 @@ public class ValorMercadoService {
             .toList();
     }
 
-    private void validarDataPosicao(@NotNull LocalDateTime dataPosicao, LocalDateTime dataEmissao, LocalDateTime dataVencimento) {
+    public ValorMercado consultarValorMercadoMaisRecenteDeAtivo(AtivoFinanceiro ativoFinanceiro) {
+        return consultarValoresMercadoDeAtivo(ativoFinanceiro)
+            .stream()
+            .max(Comparator.comparing(ValorMercado::getData))
+            .orElseThrow(() -> new NoSuchElementException("Valor de mercado não encontrado"));
+    }
+
+    public ValorMercado removerValorMercado(Long valorMercadoId) {
+        ValorMercado valorMercado = consultarValorMercadoPorId(valorMercadoId)
+            .orElseThrow(() -> new NoSuchElementException("Valor de mercado não encontrado"));
+        valorMercadoRepository.delete(valorMercado);
+        return valorMercado;
+    }
+
+    public void validarDataPosicao(@NotNull LocalDateTime dataPosicao, LocalDateTime dataEmissao, LocalDateTime dataVencimento) {
         if (dataPosicao.isBefore(dataEmissao) || dataPosicao.isAfter(dataVencimento)) {
-            throw new RuntimeException("A data do valor de mercado deve estar entre a data de emissão e a data de vencimento do ativo financeiro.");
+            throw new DataMovimentacaoInvalidaException("A data do valor de mercado deve estar entre a data de emissão e a data de vencimento do ativo financeiro.");
         }
     }
 

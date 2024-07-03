@@ -1,6 +1,6 @@
 package dev.processo_seletivo.gerenciador_ativos.dto;
 
-import dev.processo_seletivo.gerenciador_ativos.model.Movimentacao;
+import dev.processo_seletivo.gerenciador_ativos.entity.Movimentacao;
 import lombok.*;
 
 import java.math.BigDecimal;

@@ -1,7 +1,8 @@
 package dev.processo_seletivo.gerenciador_ativos.service.helper;
 
-import dev.processo_seletivo.gerenciador_ativos.model.ContaCorrente;
-import dev.processo_seletivo.gerenciador_ativos.model.Lancamento;
+import dev.processo_seletivo.gerenciador_ativos.entity.ContaCorrente;
+import dev.processo_seletivo.gerenciador_ativos.entity.Lancamento;
+import dev.processo_seletivo.gerenciador_ativos.exception.SaldoNegativoException;
 import dev.processo_seletivo.gerenciador_ativos.repository.ContaCorrenteRepository;
 import dev.processo_seletivo.gerenciador_ativos.repository.LancamentoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -57,7 +58,7 @@ public class ContaCorrenteServiceHelper {
         BigDecimal valorLancamentosEntrada = valorLancamentosPorTipo.getOrDefault(Lancamento.TipoLancamento.ENTRADA, BigDecimal.ZERO);
         BigDecimal valorLancamentosSaida = valorLancamentosPorTipo.getOrDefault(Lancamento.TipoLancamento.SAIDA, BigDecimal.ZERO);
         if (valorLancamentosEntrada.compareTo(valorLancamentosSaida) < 0) {
-            throw new RuntimeException("Valor do saldo é negativo.");
+            throw new SaldoNegativoException("Valor do saldo é negativo.");
         }
 
         return valorLancamentosEntrada.subtract(valorLancamentosSaida);

@@ -1,7 +1,7 @@
 package dev.processo_seletivo.gerenciador_ativos.repository;
 
-import dev.processo_seletivo.gerenciador_ativos.model.AtivoFinanceiro;
-import dev.processo_seletivo.gerenciador_ativos.model.ValorMercado;
+import dev.processo_seletivo.gerenciador_ativos.entity.AtivoFinanceiro;
+import dev.processo_seletivo.gerenciador_ativos.entity.ValorMercado;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

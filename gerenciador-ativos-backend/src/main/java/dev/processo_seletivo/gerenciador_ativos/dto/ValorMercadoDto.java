@@ -12,6 +12,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 public class ValorMercadoDto {
 
+    public Long ativoFinanceiroId;
     public BigDecimal valor;
     public LocalDateTime data;
 

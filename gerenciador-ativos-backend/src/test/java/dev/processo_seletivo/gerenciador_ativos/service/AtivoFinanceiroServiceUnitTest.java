@@ -1,7 +1,7 @@
 package dev.processo_seletivo.gerenciador_ativos.service;
 
 import dev.processo_seletivo.gerenciador_ativos.dto.AtivoFinanceiroDto;
-import dev.processo_seletivo.gerenciador_ativos.model.AtivoFinanceiro;
+import dev.processo_seletivo.gerenciador_ativos.entity.AtivoFinanceiro;
 import dev.processo_seletivo.gerenciador_ativos.repository.AtivoFinanceiroRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

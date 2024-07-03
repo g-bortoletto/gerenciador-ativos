@@ -1,6 +1,6 @@
 package dev.processo_seletivo.gerenciador_ativos.service;
 
-import dev.processo_seletivo.gerenciador_ativos.model.ContaCorrente;
+import dev.processo_seletivo.gerenciador_ativos.entity.ContaCorrente;
 import dev.processo_seletivo.gerenciador_ativos.repository.ContaCorrenteRepository;
 import dev.processo_seletivo.gerenciador_ativos.service.helper.ContaCorrenteServiceHelper;
 import org.junit.jupiter.api.AfterEach;

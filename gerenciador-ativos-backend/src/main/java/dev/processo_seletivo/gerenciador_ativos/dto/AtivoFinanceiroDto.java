@@ -1,6 +1,6 @@
 package dev.processo_seletivo.gerenciador_ativos.dto;
 
-import dev.processo_seletivo.gerenciador_ativos.model.AtivoFinanceiro;
+import dev.processo_seletivo.gerenciador_ativos.entity.AtivoFinanceiro;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

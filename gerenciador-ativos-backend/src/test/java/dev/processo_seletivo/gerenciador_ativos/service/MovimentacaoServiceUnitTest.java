@@ -2,10 +2,10 @@ package dev.processo_seletivo.gerenciador_ativos.service;
 
 import dev.processo_seletivo.gerenciador_ativos.dto.LancamentoDto;
 import dev.processo_seletivo.gerenciador_ativos.dto.MovimentacaoDto;
-import dev.processo_seletivo.gerenciador_ativos.model.AtivoFinanceiro;
-import dev.processo_seletivo.gerenciador_ativos.model.ContaCorrente;
-import dev.processo_seletivo.gerenciador_ativos.model.Lancamento;
-import dev.processo_seletivo.gerenciador_ativos.model.Movimentacao;
+import dev.processo_seletivo.gerenciador_ativos.entity.AtivoFinanceiro;
+import dev.processo_seletivo.gerenciador_ativos.entity.ContaCorrente;
+import dev.processo_seletivo.gerenciador_ativos.entity.Lancamento;
+import dev.processo_seletivo.gerenciador_ativos.entity.Movimentacao;
 import dev.processo_seletivo.gerenciador_ativos.repository.MovimentacaoRepository;
 import dev.processo_seletivo.gerenciador_ativos.service.helper.ContaCorrenteServiceHelper;
 import org.junit.jupiter.api.BeforeEach;
@@ -22,7 +22,6 @@ import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.when;
 
 @SpringBootTest
@@ -65,7 +64,7 @@ class MovimentacaoServiceUnitTest {
     }
 
     @Test
-    void testIncluirMovimentacaoSuccess() {
+    void testIncluirMovimentacaoValida() {
         when(ativoFinanceiroService.consultarAtivoFinanceiroPorId(movimentacaoDto.getAtivoFinanceiroId()))
             .thenReturn(ativoFinanceiro);
 
@@ -76,7 +75,7 @@ class MovimentacaoServiceUnitTest {
             .thenReturn(new BigDecimal("1000"));
 
         when(lancamentoService.incluirLancamento(
-            eq(movimentacaoDto.getContaCorrenteId()), any(LancamentoDto.class)))
+            any(LancamentoDto.class)))
             .thenReturn(new Lancamento());
 
         when(movimentacaoRepository.save(any(Movimentacao.class)))
@@ -87,7 +86,7 @@ class MovimentacaoServiceUnitTest {
     }
 
     @Test
-    void testIncluirMovimentacaoInvalidDate() {
+    void testIncluirMovimentacaoDataInvalida() {
         movimentacaoDto.setData(LocalDateTime.now().plusDays(10));
 
         when(ativoFinanceiroService.consultarAtivoFinanceiroPorId(movimentacaoDto.getAtivoFinanceiroId()))
@@ -110,7 +109,7 @@ class MovimentacaoServiceUnitTest {
             .thenReturn(Optional.of(contaCorrente));
 
         when(contaCorrenteServiceHelper.consultarSaldoContaCorrente(contaCorrente, movimentacaoDto.getData()))
-            .thenReturn(new BigDecimal("500"));
+            .thenReturn(new BigDecimal("0"));
 
         Exception exception = assertThrows(RuntimeException.class, () ->
             movimentacaoService.incluirMovimentacao(movimentacaoDto));
@@ -119,7 +118,7 @@ class MovimentacaoServiceUnitTest {
     }
 
     @Test
-    void testConsultarMovimentacoesPorContaSuccess() {
+    void testConsultarMovimentacoesPorConta() {
         when(contaCorrenteServiceHelper.consultarContaCorrentePorId(1L))
             .thenReturn(Optional.of(contaCorrente));
 
@@ -131,7 +130,7 @@ class MovimentacaoServiceUnitTest {
     }
 
     @Test
-    void testConsultarMovimentacoesPorContaNotFound() {
+    void testConsultarMovimentacoesPorContaContaInexistente() {
         when(contaCorrenteServiceHelper.consultarContaCorrentePorId(1L))
             .thenReturn(Optional.empty());
 

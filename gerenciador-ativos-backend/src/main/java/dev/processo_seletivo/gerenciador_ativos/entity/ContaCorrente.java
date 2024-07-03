@@ -1,4 +1,4 @@
-package dev.processo_seletivo.gerenciador_ativos.model;
+package dev.processo_seletivo.gerenciador_ativos.entity;
 
 import jakarta.persistence.*;
 import lombok.Data;

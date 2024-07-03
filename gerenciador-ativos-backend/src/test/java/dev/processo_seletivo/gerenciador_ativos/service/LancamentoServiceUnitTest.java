@@ -1,7 +1,7 @@
 package dev.processo_seletivo.gerenciador_ativos.service;
 
-import dev.processo_seletivo.gerenciador_ativos.model.ContaCorrente;
-import dev.processo_seletivo.gerenciador_ativos.model.Lancamento;
+import dev.processo_seletivo.gerenciador_ativos.entity.ContaCorrente;
+import dev.processo_seletivo.gerenciador_ativos.entity.Lancamento;
 import dev.processo_seletivo.gerenciador_ativos.dto.LancamentoDto;
 import dev.processo_seletivo.gerenciador_ativos.repository.LancamentoRepository;
 import dev.processo_seletivo.gerenciador_ativos.service.helper.ContaCorrenteServiceHelper;
@@ -48,6 +48,7 @@ public class LancamentoServiceUnitTest {
         contaCorrente.setId(1L);
         Lancamento lancamento = new Lancamento();
         LancamentoDto lancamentoDto = new LancamentoDto(
+            1L,
             Lancamento.TipoLancamento.ENTRADA,
             new BigDecimal("100.00"),
             "Teste",
@@ -59,7 +60,7 @@ public class LancamentoServiceUnitTest {
         when(contaCorrenteService.consultarSaldoContaCorrente(anyLong(), any(LocalDateTime.class)))
             .thenReturn(new BigDecimal("100.00"));
 
-        Lancamento result = lancamentoService.incluirLancamento(1L, lancamentoDto);
+        Lancamento result = lancamentoService.incluirLancamento(lancamentoDto);
 
         assertNotNull(result);
         verify(lancamentoRepository, times(1)).save(any(Lancamento.class));
@@ -72,6 +73,7 @@ public class LancamentoServiceUnitTest {
         Lancamento lancamento = new Lancamento();
         lancamento.setId(1L);
         LancamentoDto lancamentoDto = new LancamentoDto(
+            1L,
             Lancamento.TipoLancamento.SAIDA,
             new BigDecimal("100.00"),
             "Teste",
@@ -84,7 +86,7 @@ public class LancamentoServiceUnitTest {
             .thenReturn(new BigDecimal("50.00"));
 
         assertThrows(RuntimeException.class, () -> {
-            lancamentoService.incluirLancamento(contaCorrente.getId(), lancamentoDto);
+            lancamentoService.incluirLancamento(lancamentoDto);
         });
         verify(lancamentoRepository, times(0)).save(any(Lancamento.class));
     }
@@ -110,12 +112,12 @@ public class LancamentoServiceUnitTest {
         lancamento.setData(data.minusDays(1));
         List<Lancamento> lancamentos = List.of(lancamento);
 
-        when(contaCorrenteServiceHelper.consultarLancamentosPorContaCorrente(any(ContaCorrente.class))).thenReturn(lancamentos);
+        when(lancamentoRepository.findByContaCorrente(any(ContaCorrente.class))).thenReturn(lancamentos);
 
         List<Lancamento> result = lancamentoService.consultarLancamentosPorContaCorrenteAteData(contaCorrente, data);
 
         assertEquals(1, result.size());
-        verify(contaCorrenteServiceHelper, times(1)).consultarLancamentosPorContaCorrente(contaCorrente);
+        verify(lancamentoRepository, times(1)).findByContaCorrente(contaCorrente);
     }
 
 }
