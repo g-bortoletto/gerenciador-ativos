@@ -1,0 +1,24 @@
+<table class="table">
+
+    <thead class="thead-dark">
+        <tr>
+            <th></th>
+            <th>NOME</th>
+            <th>QUANTIDADE</th>
+            <th>VALOR MERCADO</th>
+            <th>RENDIMENTO</th>
+            <th>LUCRO</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        <tr *ngFor="let posicao of posicoes">
+            <td class="align-middle">{{ posicao.ativoFinanceiro.nome }}</td>
+            <td class="align-middle">{{ posicao.quantidadeTotal}}</td>
+            <td class="align-middle">{{ posicao.valorMercadoTotal | currency:'BRL'}}</td>
+            <td class="align-middle">{{ posicao.rendimento}}</td>
+            <td class="align-middle">{{ posicao.lucro}}</td>
+        </tr>
+
+    </tbody>
+</table>

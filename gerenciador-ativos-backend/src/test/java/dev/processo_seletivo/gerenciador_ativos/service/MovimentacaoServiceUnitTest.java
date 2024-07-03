@@ -6,6 +6,7 @@ import dev.processo_seletivo.gerenciador_ativos.entity.AtivoFinanceiro;
 import dev.processo_seletivo.gerenciador_ativos.entity.ContaCorrente;
 import dev.processo_seletivo.gerenciador_ativos.entity.Lancamento;
 import dev.processo_seletivo.gerenciador_ativos.entity.Movimentacao;
+import dev.processo_seletivo.gerenciador_ativos.exception.DataMovimentacaoInvalidaException;
 import dev.processo_seletivo.gerenciador_ativos.repository.MovimentacaoRepository;
 import dev.processo_seletivo.gerenciador_ativos.service.helper.ContaCorrenteServiceHelper;
 import org.junit.jupiter.api.BeforeEach;
@@ -92,7 +93,7 @@ class MovimentacaoServiceUnitTest {
         when(ativoFinanceiroService.consultarAtivoFinanceiroPorId(movimentacaoDto.getAtivoFinanceiroId()))
             .thenReturn(ativoFinanceiro);
 
-        Exception exception = assertThrows(IllegalArgumentException.class, () ->
+        Exception exception = assertThrows(DataMovimentacaoInvalidaException.class, () ->
             movimentacaoService.incluirMovimentacao(movimentacaoDto));
 
         assertEquals("Data de movimentação inválida", exception.getMessage());

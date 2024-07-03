@@ -1,9 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
 import { ContaCorrente } from '../common/conta-corrente';
 import { Lancamento } from '../common/lancamento';
+import { Posicao } from '../common/posicao';
 
 @Injectable({
   providedIn: 'root'
@@ -17,9 +17,9 @@ export class ContaCorrenteService {
       .get<ContaCorrente>("http://localhost:8080/api/v0/contas-corrente/1/saldo/" + new Date().toISOString());
   }
 
-  incluirLancamento(detalhesLancamento: Lancamento): Observable<any> {
+  consultarPosicoes(): Observable<any> {
     return this.httpClient
-      .post<ContaCorrente>("http://localhost:8080/api/v0/lancamentos", detalhesLancamento);
+      .get<Posicao[]>("http://localhost:8080/api/v0/contas-corrente/1/posicoes/" + new Date().toISOString());
   }
 
 }

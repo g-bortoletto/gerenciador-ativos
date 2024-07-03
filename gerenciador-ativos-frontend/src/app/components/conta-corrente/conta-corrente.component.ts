@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { ContaCorrenteService } from '../../services/conta-corrente.service';
-import { ContaCorrente } from '../../common/conta-corrente';
-import { Lancamento } from '../../common/lancamento';
 
 @Component({
   selector: 'app-conta-corrente',
