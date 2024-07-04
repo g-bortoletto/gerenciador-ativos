@@ -10,13 +10,11 @@ import dev.processo_seletivo.gerenciador_ativos.service.LancamentoService;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.NoSuchElementException;
 
 @CrossOrigin(origins = "http://localhost:4200")
 @RestController
@@ -43,8 +41,12 @@ public class LancamentoController {
         }
     }
 
-    @GetMapping
-    public ResponseEntity<List<Lancamento>> consultarLancamentosPorContaCorrentePorData(@RequestParam("conta-corrente-id") Long contaCorrenteId, @RequestParam(value = "data-i", required = false) LocalDateTime primeiraData, @RequestParam(value = "data-f", required = false)LocalDateTime segundaData) {
+    @GetMapping("/{conta-id}")
+    public ResponseEntity<List<Lancamento>> consultarLancamentosPorContaCorrentePorData(
+        @PathVariable("conta-id") Long contaCorrenteId,
+        @RequestParam(value = "data-i", required = false) LocalDateTime primeiraData,
+        @RequestParam(value = "data-f", required = false) LocalDateTime segundaData) {
+
         ContaCorrente contaCorrente = criarContaCorrenteComId(contaCorrenteId);
 
         if (primeiraData == null && segundaData == null) {

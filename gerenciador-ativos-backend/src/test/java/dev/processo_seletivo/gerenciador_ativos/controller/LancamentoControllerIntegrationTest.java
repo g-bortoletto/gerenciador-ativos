@@ -85,8 +85,7 @@ public class LancamentoControllerIntegrationTest {
     public void testConsultarTodosLancamentos() throws Exception {
         lancamentoDto.setDescricao("testConsultarTodosLancamentos");
         mockMvc.perform(
-                get(API_URI)
-                    .param("conta-corrente-id", "1"))
+                get(API_URI + "/1"))
             .andExpect(status().isOk())
             .andExpect(jsonPath("$", isA(JSONArray.class)))
             .andDo(print());
@@ -96,8 +95,7 @@ public class LancamentoControllerIntegrationTest {
     public void consultarLancamentosAteData() throws Exception {
         lancamentoDto.setDescricao("testConsultarTodosLancamentos");
         mockMvc.perform(
-                get(API_URI)
-                    .param("conta-corrente-id", "1")
+                get(API_URI + "/1")
                     .param("data-f", "2024-07-03T01:00:00"))
             .andExpect(status().isOk())
             .andExpect(jsonPath("$", isA(JSONArray.class)))
@@ -108,8 +106,7 @@ public class LancamentoControllerIntegrationTest {
     public void consultarLancamentosPorPeriodoValido() throws Exception {
         lancamentoDto.setDescricao("testConsultarTodosLancamentos");
         mockMvc.perform(
-                get(API_URI)
-                    .param("conta-corrente-id", "1")
+                get(API_URI + "/1")
                     .param("data-f", "2024-07-03T01:00:00")
                     .param("data-i", "2024-07-02T01:00:00"))
             .andExpect(status().isOk())
@@ -121,8 +118,7 @@ public class LancamentoControllerIntegrationTest {
     public void consultarLancamentoPorPeriodoInvalido() throws Exception {
         lancamentoDto.setDescricao("testConsultarTodosLancamentos");
         mockMvc.perform(
-                get(API_URI)
-                    .param("conta-corrente-id", "1")
+                get(API_URI + "/1")
                     .param("data-f", "2024-07-03T01:00:00")
                     .param("data-i", "2024-07-03T01:00:00"))
             .andExpect(status().isBadRequest())
