@@ -6,6 +6,10 @@ Um conhecido seu está montando uma startup com uma solução de finanças pesso
 
 A aplicação tem como propósito ajudar pessoas a gerirem seus ativos financeiros e acompanharem o crescimento de seu patrimônio e saldo em sua conta corrente.
 
+## Repositório
+
+O branch main é o mais atualizado, depois foram criados branches com as versões de cada dia do projeto, desde o dia da entrega.
+
 ## Comentários iniciais
 
 Acredito que consegui fazer tudo que pede no nível 1 e a maior parte das coisas que pede no nível dois pensando no backend. O frontend é onde tenho menos experiência, apesar de já ter feito alguns cursos, portanto acabei enroscando um pouco lá.
