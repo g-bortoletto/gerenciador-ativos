@@ -20,7 +20,9 @@
 			<input type="datetime-local" class="form-control" id="data-lancamento" [(ngModel)]="lancamento.data"
 				[ngModelOptions]="{standalone: true}">
 		</div>
-		<button type="submit" class="btn btn-primary" (click)="incluirLancamento()">Incluir Lançamento</button>
+		<div class="d-grid gap-2 col-6 mx-auto">
+			<button type="submit" class="btn btn-primary" (click)="incluirLancamento()">Incluir Lançamento</button>
+		</div>
 	</form>
 	<h2 class="text-center"><b>Saldo:</b> {{ contaCorrenteSaldo | currency:'BRL' }}</h2>
 </div>
