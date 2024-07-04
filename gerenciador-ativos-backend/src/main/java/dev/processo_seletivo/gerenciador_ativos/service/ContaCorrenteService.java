@@ -34,28 +34,9 @@ public class ContaCorrenteService {
     @Autowired
     private AtivoFinanceiroService ativoFinanceiroService;
 
-    @Transactional
-    public ContaCorrente incluirContaCorrente() {
-        return listaContasCorrente.save(new ContaCorrente());
-    }
-
-    public List<ContaCorrente> consultarContasCorrente() {
-        return listaContasCorrente.findAll();
-    }
-
     public Optional<ContaCorrente> consultarContaCorrentePorId(Long contaCorrenteId) {
-        return contaCorrenteServiceHelper.consultarContaCorrentePorId(contaCorrenteId);
-    }
-
-    @Transactional
-    public boolean removerContaCorrentePorId(Long contaCorrenteId) {
-        Optional<ContaCorrente> contaCorrenteOptional = contaCorrenteServiceHelper
-            .consultarContaCorrentePorId(contaCorrenteId);
-        if (contaCorrenteOptional.isEmpty()) {
-            return false;
-        }
-        listaContasCorrente.delete(contaCorrenteOptional.get());
-        return true;
+        return listaContasCorrente
+            .findById(contaCorrenteId);
     }
 
     public BigDecimal consultarSaldoContaCorrente(Long contaCorrenteId, LocalDateTime dataPosicao) {
