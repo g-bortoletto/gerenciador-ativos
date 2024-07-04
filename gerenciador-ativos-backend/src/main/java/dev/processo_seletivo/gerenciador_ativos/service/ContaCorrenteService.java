@@ -7,7 +7,6 @@ import dev.processo_seletivo.gerenciador_ativos.exception.SaldoNegativoException
 import dev.processo_seletivo.gerenciador_ativos.model.Posicao;
 import dev.processo_seletivo.gerenciador_ativos.repository.ContaCorrenteRepository;
 import dev.processo_seletivo.gerenciador_ativos.service.helper.ContaCorrenteServiceHelper;
-import jakarta.transaction.Transactional;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -122,8 +121,8 @@ public class ContaCorrenteService {
 
     private @NotNull BigDecimal calcularQuantidadeTotal(@NotNull Map<Movimentacao.TipoMovimentacao, BigDecimal> movimentacao) {
         BigDecimal quantidadeTotal = movimentacao
-            .getOrDefault(Movimentacao.TipoMovimentacao.VENDA, BigDecimal.ZERO)
-            .subtract(movimentacao.getOrDefault(Movimentacao.TipoMovimentacao.COMPRA, BigDecimal.ZERO));
+            .getOrDefault(Movimentacao.TipoMovimentacao.COMPRA, BigDecimal.ZERO)
+            .subtract(movimentacao.getOrDefault(Movimentacao.TipoMovimentacao.VENDA, BigDecimal.ZERO));
         if (quantidadeTotal.compareTo(BigDecimal.ZERO) < 0) {
             throw new SaldoNegativoException("A quantidade do ativo é negativa.");
         }

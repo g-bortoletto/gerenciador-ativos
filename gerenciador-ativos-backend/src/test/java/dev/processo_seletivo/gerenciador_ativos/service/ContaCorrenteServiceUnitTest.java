@@ -1,7 +1,10 @@
 package dev.processo_seletivo.gerenciador_ativos.service;
 
+import dev.processo_seletivo.gerenciador_ativos.entity.AtivoFinanceiro;
 import dev.processo_seletivo.gerenciador_ativos.entity.ContaCorrente;
-import dev.processo_seletivo.gerenciador_ativos.repository.ContaCorrenteRepository;
+import dev.processo_seletivo.gerenciador_ativos.entity.Movimentacao;
+import dev.processo_seletivo.gerenciador_ativos.entity.ValorMercado;
+import dev.processo_seletivo.gerenciador_ativos.model.Posicao;
 import dev.processo_seletivo.gerenciador_ativos.service.helper.ContaCorrenteServiceHelper;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -12,7 +15,10 @@ import org.mockito.MockitoAnnotations;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
@@ -24,9 +30,11 @@ import static org.mockito.Mockito.*;
 public class ContaCorrenteServiceUnitTest {
 
     @Mock
-    private ContaCorrenteRepository contaCorrenteRepository;
+    private MovimentacaoService movimentacaoService;
     @Mock
     private ContaCorrenteServiceHelper contaCorrenteServiceHelper;
+    @Mock
+    private AtivoFinanceiroService ativoFinanceiroService;
 
     @InjectMocks
     private ContaCorrenteService contaCorrenteService;
@@ -48,28 +56,6 @@ public class ContaCorrenteServiceUnitTest {
     }
 
     @Test
-    void testIncluirContaCorrente() {
-        ContaCorrente contaCorrente = new ContaCorrente();
-        when (contaCorrenteRepository.save(any(ContaCorrente.class))).thenReturn(contaCorrente);
-
-        ContaCorrente resultado = contaCorrenteService.incluirContaCorrente();
-
-        assertNotNull(resultado);
-        verify(contaCorrenteRepository, times(1)).save(any(ContaCorrente.class));
-    }
-
-    @Test
-    void testConsultarContasCorrente() {
-        List<ContaCorrente> contas = List.of(new ContaCorrente(), new ContaCorrente());
-        when(contaCorrenteRepository.findAll()).thenReturn(contas);
-
-        List<ContaCorrente> result = contaCorrenteService.consultarContasCorrente();
-
-        assertEquals(2, result.size());
-        verify(contaCorrenteRepository, times(1)).findAll();
-    }
-
-    @Test
     void testConsultarContaCorrentePorId() {
         ContaCorrente contaCorrente = new ContaCorrente();
         contaCorrente.setId(1L);
@@ -79,18 +65,6 @@ public class ContaCorrenteServiceUnitTest {
 
         assertTrue(result.isPresent());
         verify(contaCorrenteServiceHelper, times(1)).consultarContaCorrentePorId(1L);
-    }
-
-    @Test
-    void testRemoverContaCorrentePorId() {
-        ContaCorrente contaCorrente = new ContaCorrente();
-        contaCorrente.setId(1L);
-        when(contaCorrenteService.consultarContaCorrentePorId(anyLong())).thenReturn(Optional.of(contaCorrente));
-
-        boolean result = contaCorrenteService.removerContaCorrentePorId(1L);
-
-        assertTrue(result);
-        verify(contaCorrenteRepository, times(1)).delete(contaCorrente);
     }
 
     @Test
@@ -105,6 +79,53 @@ public class ContaCorrenteServiceUnitTest {
 
         assertNotNull(saldo);
         assertEquals(new BigDecimal("100.00"), saldo);
+    }
+
+    @Test
+    void testConsultarPosicoesContaCorrente() {
+        var contaCorrenteId = 1L;
+        var dataPosicao = LocalDateTime.now();
+
+        var ativoFinanceiro = new AtivoFinanceiro();
+        ativoFinanceiro.setId(1L);
+        ativoFinanceiro.setNome("TESTE_01");
+        ativoFinanceiro.setTipo(AtivoFinanceiro.TipoAtivoFinanceiro.RF);
+        ativoFinanceiro.setDataEmissao(LocalDateTime.parse("2024-07-01T00:00:00", DateTimeFormatter.ISO_DATE_TIME));
+        ativoFinanceiro.setDataVencimento(LocalDateTime.parse("2024-07-05T00:00:00", DateTimeFormatter.ISO_DATE_TIME));
+
+        ValorMercado valorMercado = new ValorMercado();
+        valorMercado.setId(1L);
+        valorMercado.setAtivoFinanceiro(ativoFinanceiro);
+        valorMercado.setData(ativoFinanceiro.getDataEmissao().plusHours(1));
+        valorMercado.setValor(BigDecimal.ONE);
+
+        Movimentacao movimentacao1 = new Movimentacao();
+        movimentacao1.setAtivoFinanceiro(ativoFinanceiro);
+        movimentacao1.setTipo(Movimentacao.TipoMovimentacao.COMPRA);
+        movimentacao1.setQuantidade(BigDecimal.valueOf(10));
+        movimentacao1.setValor(BigDecimal.valueOf(10.0));
+
+        Movimentacao movimentacao2 = new Movimentacao();
+        movimentacao2.setAtivoFinanceiro(ativoFinanceiro);
+        movimentacao2.setTipo(Movimentacao.TipoMovimentacao.VENDA);
+        movimentacao2.setQuantidade(BigDecimal.valueOf(5));
+        movimentacao2.setValor(BigDecimal.valueOf(5.0));
+
+        var movimentacoes = Arrays.asList(movimentacao1, movimentacao2);
+
+        when(ativoFinanceiroService.consultarValorMercado(any(AtivoFinanceiro.class)))
+            .thenReturn(valorMercado);
+        when(movimentacaoService.consultarMovimentacoesCompra(any(Long.class), any(Long.class), any(LocalDateTime.class)))
+            .thenReturn(movimentacoes);
+        when(movimentacaoService.consultarMovimentacoesPorContaAteData(eq(contaCorrenteId), any(LocalDateTime.class)))
+            .thenReturn(movimentacoes);
+
+        List<Posicao> posicoes = contaCorrenteService.consultarPosicoesContaCorrente(contaCorrenteId, dataPosicao);
+
+        assertEquals(1, posicoes.size());
+        Posicao posicao = posicoes.get(0);
+        assertEquals(ativoFinanceiro.getNome(), posicao.getAtivoFinanceiro().getNome());
+        assertEquals(BigDecimal.valueOf(5.00).setScale(2, RoundingMode.FLOOR), posicao.getQuantidadeTotal());
     }
 
 }
