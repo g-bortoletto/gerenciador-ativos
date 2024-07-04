@@ -5,6 +5,7 @@ import dev.processo_seletivo.gerenciador_ativos.entity.ContaCorrente;
 import dev.processo_seletivo.gerenciador_ativos.entity.Movimentacao;
 import dev.processo_seletivo.gerenciador_ativos.entity.ValorMercado;
 import dev.processo_seletivo.gerenciador_ativos.model.Posicao;
+import dev.processo_seletivo.gerenciador_ativos.repository.ContaCorrenteRepository;
 import dev.processo_seletivo.gerenciador_ativos.service.helper.ContaCorrenteServiceHelper;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -35,6 +36,8 @@ public class ContaCorrenteServiceUnitTest {
     private ContaCorrenteServiceHelper contaCorrenteServiceHelper;
     @Mock
     private AtivoFinanceiroService ativoFinanceiroService;
+    @Mock
+    private ContaCorrenteRepository contaCorrenteRepository;
 
     @InjectMocks
     private ContaCorrenteService contaCorrenteService;
@@ -59,12 +62,14 @@ public class ContaCorrenteServiceUnitTest {
     void testConsultarContaCorrentePorId() {
         ContaCorrente contaCorrente = new ContaCorrente();
         contaCorrente.setId(1L);
-        when(contaCorrenteServiceHelper.consultarContaCorrentePorId(anyLong())).thenReturn(Optional.of(contaCorrente));
+
+        when(contaCorrenteRepository.findById(any(Long.class)))
+            .thenReturn(Optional.of(contaCorrente));
 
         Optional<ContaCorrente> result = contaCorrenteService.consultarContaCorrentePorId(1L);
 
         assertTrue(result.isPresent());
-        verify(contaCorrenteServiceHelper, times(1)).consultarContaCorrentePorId(1L);
+        verify(contaCorrenteRepository, times(1)).findById(1L);
     }
 
     @Test

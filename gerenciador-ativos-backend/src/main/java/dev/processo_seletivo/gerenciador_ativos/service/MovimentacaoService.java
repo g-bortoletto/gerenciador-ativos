@@ -22,7 +22,6 @@ import java.math.BigDecimal;
 import java.time.DayOfWeek;
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.NoSuchElementException;
 import java.util.Objects;
 
 import static java.util.stream.Collectors.*;
@@ -84,17 +83,6 @@ public class MovimentacaoService {
         return movimentacaoRepository.save(movimentacao);
     }
 
-    private static @NotNull Movimentacao criarMovimentacao(@NotNull MovimentacaoDto movimentacaoDto, ContaCorrente contaCorrente, AtivoFinanceiro ativoFinanceiro) {
-        Movimentacao movimentacao = new Movimentacao();
-        movimentacao.setContaCorrente(contaCorrente);
-        movimentacao.setAtivoFinanceiro(ativoFinanceiro);
-        movimentacao.setTipo(movimentacaoDto.getTipo());
-        movimentacao.setQuantidade(movimentacaoDto.getQuantidade());
-        movimentacao.setData(movimentacaoDto.getData());
-        movimentacao.setValor(movimentacaoDto.getValor());
-        return movimentacao;
-    }
-
     public List<Movimentacao> consultarMovimentacoesPorConta(Long contaCorrenteId) {
         ContaCorrente contaCorrente = contaCorrenteServiceHelper
             .consultarContaCorrentePorId(contaCorrenteId)
@@ -133,6 +121,17 @@ public class MovimentacaoService {
                 )))));//@formatter:on
         return movimentacoesPorTipo.getOrDefault(Movimentacao.TipoMovimentacao.VENDA, BigDecimal.ZERO)
             .subtract(movimentacoesPorTipo.getOrDefault(Movimentacao.TipoMovimentacao.COMPRA, BigDecimal.ZERO));
+    }
+
+    private static @NotNull Movimentacao criarMovimentacao(@NotNull MovimentacaoDto movimentacaoDto, ContaCorrente contaCorrente, AtivoFinanceiro ativoFinanceiro) {
+        Movimentacao movimentacao = new Movimentacao();
+        movimentacao.setContaCorrente(contaCorrente);
+        movimentacao.setAtivoFinanceiro(ativoFinanceiro);
+        movimentacao.setTipo(movimentacaoDto.getTipo());
+        movimentacao.setQuantidade(movimentacaoDto.getQuantidade());
+        movimentacao.setData(movimentacaoDto.getData());
+        movimentacao.setValor(movimentacaoDto.getValor());
+        return movimentacao;
     }
 
     private List<Movimentacao> consultarMovimentacoesPorTipo(Long contaCorrenteId, Long ativoFinanceiroId, LocalDateTime dataPosicao, Movimentacao.TipoMovimentacao tipo) {
