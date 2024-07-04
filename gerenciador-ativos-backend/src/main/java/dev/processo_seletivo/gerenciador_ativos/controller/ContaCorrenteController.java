@@ -1,15 +1,16 @@
 package dev.processo_seletivo.gerenciador_ativos.controller;
 
-import dev.processo_seletivo.gerenciador_ativos.model.Posicao;
+import dev.processo_seletivo.gerenciador_ativos.exception.QuantidadeAtivoInsuficienteException;
+import dev.processo_seletivo.gerenciador_ativos.model.RespostaErro;
 import dev.processo_seletivo.gerenciador_ativos.service.ContaCorrenteService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.List;
 
 @CrossOrigin(origins = "http://localhost:4200/")
 @RestController
@@ -25,8 +26,13 @@ public class ContaCorrenteController {
     }
 
     @GetMapping("{id}/posicoes/{data}")
-    public ResponseEntity<List<Posicao>> consultarPosicoesContaCorrente(@PathVariable("id") Long contaCorrenteId, @PathVariable("data") String dataPosicao) {
-        return ResponseEntity.ok(contaCorrenteService.consultarPosicoesContaCorrente(contaCorrenteId, LocalDateTime.parse(dataPosicao, DateTimeFormatter.ISO_DATE_TIME)));
+    public ResponseEntity<?> consultarPosicoesContaCorrente(@PathVariable("id") Long contaCorrenteId, @PathVariable("data") String dataPosicao) {
+        try {
+            return ResponseEntity.ok(contaCorrenteService.consultarPosicoesContaCorrente(contaCorrenteId, LocalDateTime.parse(dataPosicao, DateTimeFormatter.ISO_DATE_TIME)));
+        } catch (QuantidadeAtivoInsuficienteException e) {
+            HttpStatus httpStatus = HttpStatus.INTERNAL_SERVER_ERROR;
+            return new ResponseEntity<RespostaErro>(new RespostaErro(httpStatus.value(), httpStatus.getReasonPhrase(), "Movimentações resultaram em um ativo negativo."), httpStatus);
+        }
     }
 
 }
