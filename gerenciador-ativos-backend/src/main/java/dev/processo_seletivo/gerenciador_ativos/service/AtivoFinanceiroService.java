@@ -1,5 +1,6 @@
 package dev.processo_seletivo.gerenciador_ativos.service;
 
+import dev.processo_seletivo.gerenciador_ativos.dto.ValorMercadoDto;
 import dev.processo_seletivo.gerenciador_ativos.entity.AtivoFinanceiro;
 import dev.processo_seletivo.gerenciador_ativos.dto.AtivoFinanceiroDto;
 import dev.processo_seletivo.gerenciador_ativos.entity.ValorMercado;
@@ -77,21 +78,19 @@ public class AtivoFinanceiroService {
     }
 
     @Transactional
-    public AtivoFinanceiro incluirValorMercado(Long ativoFinanceiroId, LocalDateTime data, BigDecimal valor) {
-
+    public ValorMercado incluirValorMercado(Long ativoFinanceiroId, LocalDateTime data, BigDecimal valor) {
         AtivoFinanceiro ativoFinanceiro = ativoFinanceiroRepository
             .findById(ativoFinanceiroId)
             .orElseThrow();
 
         valorMercadoService.validarDataPosicao(data, ativoFinanceiro.getDataEmissao(), ativoFinanceiro.getDataVencimento());
 
-        ValorMercado valorMercado = new ValorMercado();
-        valorMercado.setAtivoFinanceiro(ativoFinanceiro);
-        valorMercado.setData(data);
-        valorMercado.setValor(valor);
+        ValorMercadoDto valorMercadoDto = new ValorMercadoDto();
+        valorMercadoDto.setAtivoFinanceiroId(ativoFinanceiroId);
+        valorMercadoDto.setValor(valor);
+        valorMercadoDto.setData(data);
 
-        return ativoFinanceiroRepository.save(ativoFinanceiro);
-
+        return valorMercadoService.incluirValorMercadoEmAtivo(ativoFinanceiro, valorMercadoDto);
     }
 
     public ValorMercado consultarValorMercado(AtivoFinanceiro ativoFinanceiro) {
