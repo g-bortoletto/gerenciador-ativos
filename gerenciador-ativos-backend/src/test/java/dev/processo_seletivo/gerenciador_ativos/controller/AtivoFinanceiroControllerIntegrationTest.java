@@ -99,7 +99,7 @@ public class AtivoFinanceiroControllerIntegrationTest {
     @Test
     public void testIncluirValorMercado() throws Exception {
         ValorMercadoDto valorMercadoDto = new ValorMercadoDto();
-        valorMercadoDto.setData(LocalDateTime.now());
+        valorMercadoDto.setData(LocalDateTime.of(2024, 7, 4, 0, 0));
         valorMercadoDto.setValor(BigDecimal.valueOf(1000.00));
 
         mockMvc.perform(post(API_URI + "/1/valores-mercado")
