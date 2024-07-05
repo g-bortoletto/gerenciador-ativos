@@ -14,6 +14,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 @CrossOrigin(origins = "http://localhost:4200")
@@ -44,18 +45,13 @@ public class LancamentoController {
     @GetMapping("/{conta-id}")
     public ResponseEntity<List<Lancamento>> consultarLancamentosPorContaCorrentePorData(
         @PathVariable("conta-id") Long contaCorrenteId,
-        @RequestParam(value = "data-i", required = false) LocalDateTime primeiraData,
-        @RequestParam(value = "data-f", required = false) LocalDateTime segundaData) {
+        @RequestParam(value = "data-i") String primeiraDataTexto,
+        @RequestParam(value = "data-f") String segundaDataTexto) {
 
+        LocalDateTime primeiraData = LocalDateTime.parse(primeiraDataTexto, DateTimeFormatter.ISO_DATE_TIME);
+        LocalDateTime segundaData = LocalDateTime.parse(segundaDataTexto, DateTimeFormatter.ISO_DATE_TIME);
         ContaCorrente contaCorrente = criarContaCorrenteComId(contaCorrenteId);
 
-        if (primeiraData == null && segundaData == null) {
-            return ResponseEntity.ok(lancamentoService.consultarLancamentosPorContaCorrente(contaCorrente));
-        }
-
-        if (primeiraData == null || segundaData == null) {
-            return ResponseEntity.ok(lancamentoService.consultarLancamentosPorContaCorrenteAteData(contaCorrente, primeiraData == null ? segundaData : primeiraData));
-        }
 
         int comparacao = primeiraData.compareTo(segundaData);
         if (comparacao == 0) {
@@ -64,8 +60,8 @@ public class LancamentoController {
 
         return ResponseEntity.ok(lancamentoService.consultarLancamentosPorContaCorrenteEmPeriodo(
             contaCorrente,
-            comparacao < 0 ? primeiraData : segundaData,
-            comparacao < 0 ? segundaData : primeiraData));
+            primeiraData,
+            segundaData));
     }
 
     private @NotNull ContaCorrente criarContaCorrenteComId(Long contaCorrenteId) {
