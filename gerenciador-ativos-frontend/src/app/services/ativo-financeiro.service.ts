@@ -18,7 +18,12 @@ export class AtivoFinanceiroService {
 
   editarAtivoFinanceiro(ativoFinanceiro: AtivoFinanceiro): Observable<any> {
     return this.httpClient
-      .put<AtivoFinanceiro>("http://localhost:8080/api/v0/ativos-financeiros", ativoFinanceiro);
+      .put<AtivoFinanceiro>("http://localhost:8080/api/v0/ativos-financeiros/" + ativoFinanceiro.id, ativoFinanceiro);
+  }
+
+  consultarAtivoFinanceiro(ativoFinanceiro: AtivoFinanceiro): Observable<any> {
+    return this.httpClient
+      .get<AtivoFinanceiro[]>("http://localhost:8080/api/v0/ativos-financeiros/" + ativoFinanceiro.id);
   }
 
   consultarAtivosFinanceiros(): Observable<any> {
@@ -28,7 +33,7 @@ export class AtivoFinanceiroService {
 
   removerAtivoFinanceiro(ativoFinanceiro: AtivoFinanceiro): Observable<any> {
     return this.httpClient
-      .delete<AtivoFinanceiro>("http://localhost:8080/api/v0/ativos-financeiros");
+      .delete<AtivoFinanceiro>("http://localhost:8080/api/v0/ativos-financeiros/" + ativoFinanceiro.id);
   }
 
 }
