@@ -1,0 +1,53 @@
+<div class="container">
+	<select class="form-select" aria-label="Ativo Financeiro" [(ngModel)]="ativoFinanceiro"
+		[ngModelOptions]="{standalone: true}" (ngModelChange)="consultarValoresMercado()">
+		<option *ngFor="let ativo of ativosFinanceiros" [ngValue]="ativo">
+			{{ ativo.nome }}
+		</option>
+	</select>
+	<table class="table">
+		<thead class="thead-dark">
+			<tr>
+				<th>DATA</th>
+				<th>VALOR</th>
+				<th>REMOVER</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr *ngFor="let valor of valoresMercado">
+				<td class="align-middle">{{ valor.data }}</td>
+				<td class="align-middle">{{ valor.valor }}</td>
+				<td class="align-middle"><button type="button" class="btn btn-primary"
+						(click)="removerValorMercado(ativoFinanceiro, valor)">Remover</button></td>
+			</tr>
+		</tbody>
+	</table>
+	<div class="accordion" id="accordionExample">
+		<div class="accordion-item">
+			<h2 class="accordion-header">
+				<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne"
+					aria-expanded="true" aria-controls="collapseOne">
+					Incluir
+				</button>
+			</h2>
+			<div id="collapseOne" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+				<div class="accordion-body">
+					<form class="mt-3 mb-3">
+						<div class="mb-3">
+							<label for="valor-mercado-valor" class="form-label">Valor</label>
+							<input type="text" class="form-control" id="valor-mercado-valor" [(ngModel)]="valorMercado.valor"
+								[ngModelOptions]="{standalone: true}">
+						</div>
+						<div class="mb-3">
+							<label for="valor-mercado-data" class="form-label">Data</label>
+							<input type="datetime-local" class="form-control" id="valor-mercado-data" [(ngModel)]="valorMercado.data"
+								[ngModelOptions]="{standalone: true}">
+							<div class="d-grid gap-2 col-6 mx-auto">
+								<button type="submit" class="btn btn-primary" (click)="incluirValorMercado()">OK</button>
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>

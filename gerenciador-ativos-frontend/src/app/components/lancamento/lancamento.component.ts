@@ -11,6 +11,9 @@ import { ContaCorrenteService } from '../../services/conta-corrente.service';
 export class LancamentoComponent {
 
   public lancamento: Lancamento = new Lancamento(1, "ENTRADA", 0, "", new Date().toISOString());
+  public lancamentos: Lancamento[] = [];
+  public dataInicio: string = "";
+  public dataFim: string = "";
 
   public contaCorrenteSaldo: number = 0;
 
@@ -34,6 +37,12 @@ export class LancamentoComponent {
       error: response => console.error(response),
       complete: () => this.consultarSaldo()
     });
+  }
+
+  consultarLancamentos(): void {
+    this.lancamentoService.consultarLancamentos(this.dataInicio, this.dataFim).subscribe({
+      next: response => { this.lancamentos = response; }
+    })
   }
 
 }

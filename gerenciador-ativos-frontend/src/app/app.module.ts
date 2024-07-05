@@ -11,6 +11,7 @@ import { AtivoFinanceiroComponent } from './components/ativo-financeiro/ativo-fi
 import { LancamentoComponent } from './components/lancamento/lancamento.component';
 import { PosicaoComponent } from './components/posicao/posicao.component';
 import { MovimentacaoComponent } from './components/movimentacao/movimentacao.component';
+import { ValorMercadoComponent } from './components/valor-mercado/valor-mercado.component';
 
 @NgModule({
   declarations: [
@@ -20,6 +21,7 @@ import { MovimentacaoComponent } from './components/movimentacao/movimentacao.co
     LancamentoComponent,
     PosicaoComponent,
     MovimentacaoComponent,
+    ValorMercadoComponent,
   ],
   imports: [
     BrowserModule,
