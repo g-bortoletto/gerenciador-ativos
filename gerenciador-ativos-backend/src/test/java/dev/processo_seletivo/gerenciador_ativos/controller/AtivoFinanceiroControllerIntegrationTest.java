@@ -118,9 +118,8 @@ public class AtivoFinanceiroControllerIntegrationTest {
     @Test
     public void testRemoverValorMercado() throws Exception {
         Long valorMercadoId = 7L;
-        mockMvc.perform(delete(API_URI + "/4/valores-mercado")
-                .contentType(MediaType.APPLICATION_JSON)
-                .content(objectMapper.writeValueAsString(valorMercadoId)))
+        mockMvc.perform(delete(API_URI + "/4/valores-mercado/" + valorMercadoId)
+                .contentType(MediaType.APPLICATION_JSON))
             .andExpect(status().isOk());
     }
 

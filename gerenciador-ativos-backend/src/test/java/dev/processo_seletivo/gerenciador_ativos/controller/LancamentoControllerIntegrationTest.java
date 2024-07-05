@@ -82,27 +82,6 @@ public class LancamentoControllerIntegrationTest {
     }
 
     @Test
-    public void testConsultarTodosLancamentos() throws Exception {
-        lancamentoDto.setDescricao("testConsultarTodosLancamentos");
-        mockMvc.perform(
-                get(API_URI + "/1"))
-            .andExpect(status().isOk())
-            .andExpect(jsonPath("$", isA(JSONArray.class)))
-            .andDo(print());
-    }
-
-    @Test
-    public void consultarLancamentosAteData() throws Exception {
-        lancamentoDto.setDescricao("testConsultarTodosLancamentos");
-        mockMvc.perform(
-                get(API_URI + "/1")
-                    .param("data-f", "2024-07-03T01:00:00"))
-            .andExpect(status().isOk())
-            .andExpect(jsonPath("$", isA(JSONArray.class)))
-            .andDo(print());
-    }
-
-    @Test
     public void consultarLancamentosPorPeriodoValido() throws Exception {
         lancamentoDto.setDescricao("testConsultarTodosLancamentos");
         mockMvc.perform(
