@@ -1,5 +1,6 @@
 package dev.processo_seletivo.gerenciador_ativos.service;
 
+import dev.processo_seletivo.gerenciador_ativos.dto.AtivoFinanceiroDto;
 import dev.processo_seletivo.gerenciador_ativos.entity.AtivoFinanceiro;
 import dev.processo_seletivo.gerenciador_ativos.entity.ContaCorrente;
 import dev.processo_seletivo.gerenciador_ativos.entity.Movimentacao;
@@ -7,6 +8,7 @@ import dev.processo_seletivo.gerenciador_ativos.entity.ValorMercado;
 import dev.processo_seletivo.gerenciador_ativos.model.Posicao;
 import dev.processo_seletivo.gerenciador_ativos.repository.ContaCorrenteRepository;
 import dev.processo_seletivo.gerenciador_ativos.service.helper.ContaCorrenteServiceHelper;
+import org.jetbrains.annotations.NotNull;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

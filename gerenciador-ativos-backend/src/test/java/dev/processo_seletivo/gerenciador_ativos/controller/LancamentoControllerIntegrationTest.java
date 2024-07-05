@@ -37,7 +37,7 @@ public class LancamentoControllerIntegrationTest {
     @Autowired
     private final ObjectMapper objMapper = new ObjectMapper();
 
-    private LancamentoDto lancamentoDto = new LancamentoDto(
+    private final LancamentoDto lancamentoDto = new LancamentoDto(
         1L,
         Lancamento.TipoLancamento.ENTRADA,
         BigDecimal.valueOf(1000.0),
