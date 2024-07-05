@@ -46,7 +46,7 @@ public class AtivoFinanceiroController {
     }
 
     @PostMapping("/{id}/valores-mercado")
-    public ResponseEntity<AtivoFinanceiro> incluirValorMercado(
+    public ResponseEntity<ValorMercado> incluirValorMercado(
         @PathVariable("id") Long ativoFinanceiroId,
         @RequestBody @NotNull ValorMercadoDto valorMercado) {
         return ResponseEntity.ok(ativoFinanceiroService.incluirValorMercado(
@@ -60,8 +60,8 @@ public class AtivoFinanceiroController {
         return ResponseEntity.ok(ativoFinanceiroService.consultarValoresMercado(ativoFinanceiroId));
     }
 
-    @DeleteMapping(value = "/{id}/valores-mercado")
-    public ResponseEntity<AtivoFinanceiro> removerValorMercado(@PathVariable("id") Long ativoFinanceiroId, @RequestBody Long valorMercadoId) {
+    @DeleteMapping(value = "/{id}/valores-mercado/{vm-id}")
+    public ResponseEntity<AtivoFinanceiro> removerValorMercado(@PathVariable("id") Long ativoFinanceiroId, @PathVariable("vm-id") Long valorMercadoId) {
         return ResponseEntity.ok(ativoFinanceiroService.removerValorMercado(valorMercadoId));
     }
 
