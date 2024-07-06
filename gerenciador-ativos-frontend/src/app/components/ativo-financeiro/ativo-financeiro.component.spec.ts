@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { AtivoFinanceiroComponent } from './ativo-financeiro.component';
+import { AtivoFinanceiroService } from '../../services/ativo-financeiro.service';
 
 describe('AtivoFinanceiroComponent', () => {
   let component: AtivoFinanceiroComponent;
@@ -8,6 +9,7 @@ describe('AtivoFinanceiroComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
+      imports: [AtivoFinanceiroService],
       declarations: [AtivoFinanceiroComponent],
     }).compileComponents();
 
