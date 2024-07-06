@@ -1,23 +1,25 @@
 <div class="container">
   <h2 class="text-center">
-    <b>Saldo:</b> {{ contaCorrenteSaldo | currency: "BRL" }}
+    <b>Saldo:</b> {{ contaCorrenteSaldo | currency : "BRL" }}
   </h2>
-  <div class="input-group mb-3">
-    <input
-      type="datetime-local"
-      class="form-control"
-      placeholder="data posição"
-      aria-label="data posição"
-      aria-describedby="atualizar-saldo"
-      [(ngModel)]="dataPosicao"
-    />
-    <button
-      class="btn btn-outline-secondary"
-      type="button"
-      id="atualizar-saldo"
-      (click)="consultarSaldo()"
-    >
-      Atualizar
-    </button>
+  <div class="d-grid gap-2 col-6 mx-auto">
+    <div class="input-group mb-3">
+      <input
+        type="datetime-local"
+        class="form-control"
+        placeholder="data posição"
+        aria-label="data posição"
+        aria-describedby="atualizar-saldo"
+        [(ngModel)]="dataPosicao"
+      />
+      <button
+        class="btn btn-outline-secondary"
+        type="button"
+        id="atualizar-saldo"
+        (click)="consultarSaldo()"
+      >
+        Atualizar
+      </button>
+    </div>
   </div>
 </div>

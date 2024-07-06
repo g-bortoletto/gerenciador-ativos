@@ -96,27 +96,29 @@
       data-bs-parent="#accordionExample"
     >
       <div class="accordion-body">
-        <select
-          class="form-select"
-          aria-label="Editar Ativo Financeiro"
-          [(ngModel)]="ativoFinanceiro"
-          [ngModelOptions]="{ standalone: true }"
-        >
-          <option
-            *ngFor="let ativo of listaAtivosFinanceiros"
-            [ngValue]="ativo"
-          >
-            {{ ativo.nome }}
-          </option>
-        </select>
         <div class="d-grid gap-2 col-6 mx-auto">
-          <button
-            type="submit"
-            class="btn btn-primary"
-            (click)="mostrarEdicao = true"
-          >
-            Editar
-          </button>
+          <div class="input-group mb-3">
+            <select
+              class="form-select"
+              aria-label="Editar Ativo Financeiro"
+              [(ngModel)]="ativoFinanceiro"
+              [ngModelOptions]="{ standalone: true }"
+            >
+              <option
+                *ngFor="let ativo of listaAtivosFinanceiros"
+                [ngValue]="ativo"
+              >
+                {{ ativo.nome }}
+              </option>
+            </select>
+            <button
+              type="submit"
+              class="btn btn-outline-secondary"
+              (click)="mostrarEdicao = true"
+            >
+              Editar
+            </button>
+          </div>
         </div>
         <form class="mt-3 mb-3" *ngIf="mostrarEdicao">
           <div class="mb-3">
@@ -185,6 +187,7 @@
         data-bs-target="#collapseThree"
         aria-expanded="false"
         aria-controls="collapseThree"
+        (click)="consultarAtivosFinanceiros()"
       >
         Consultar
       </button>
@@ -214,15 +217,6 @@
             </tr>
           </tbody>
         </table>
-        <div class="d-grid gap-2 col-6 mx-auto">
-          <button
-            type="submit"
-            class="btn btn-primary"
-            (click)="consultarAtivosFinanceiros()"
-          >
-            Realizar consulta
-          </button>
-        </div>
       </div>
     </div>
   </div>
@@ -246,27 +240,29 @@
       data-bs-parent="#accordionExample"
     >
       <div class="accordion-body">
-        <select
-          class="form-select"
-          aria-label="Editar Ativo Financeiro"
-          [(ngModel)]="ativoFinanceiro"
-          [ngModelOptions]="{ standalone: true }"
-        >
-          <option
-            *ngFor="let ativo of listaAtivosFinanceiros"
-            [ngValue]="ativo"
-          >
-            {{ ativo.nome }}
-          </option>
-        </select>
         <div class="d-grid gap-2 col-6 mx-auto">
-          <button
-            type="submit"
-            class="btn btn-primary"
-            (click)="removerAtivoFinanceiro()"
-          >
-            Remover
-          </button>
+          <div class="input-group mb-3">
+            <select
+              class="form-select"
+              aria-label="Remover Ativo Financeiro"
+              [(ngModel)]="ativoFinanceiro"
+              [ngModelOptions]="{ standalone: true }"
+            >
+              <option
+                *ngFor="let ativo of listaAtivosFinanceiros"
+                [ngValue]="ativo"
+              >
+                {{ ativo.nome }}
+              </option>
+            </select>
+            <button
+              class="btn btn-outline-secondary"
+              type="button"
+              (click)="removerAtivoFinanceiro()"
+            >
+              Remover
+            </button>
+          </div>
         </div>
       </div>
     </div>
