@@ -23,13 +23,8 @@ import { ValorMercadoComponent } from './components/valor-mercado/valor-mercado.
     MovimentacaoComponent,
     ValorMercadoComponent,
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    HttpClientModule,
-    FormsModule
-  ],
+  imports: [BrowserModule, AppRoutingModule, HttpClientModule, FormsModule],
   providers: [ContaCorrenteService],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

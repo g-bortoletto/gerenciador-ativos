@@ -8,10 +8,9 @@ describe('ValorMercadoComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ValorMercadoComponent]
-    })
-    .compileComponents();
-    
+      declarations: [ValorMercadoComponent],
+    }).compileComponents();
+
     fixture = TestBed.createComponent(ValorMercadoComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

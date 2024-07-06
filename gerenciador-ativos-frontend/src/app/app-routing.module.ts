@@ -12,13 +12,13 @@ const routes: Routes = [
   { path: 'saldo', component: ContaCorrenteComponent },
   { path: 'posicoes', component: PosicaoComponent },
   { path: 'lancamentos', component: LancamentoComponent },
-  { path: 'ativos-financeiros', component: AtivoFinanceiroComponent},
-  { path: 'movimentacoes', component: MovimentacaoComponent},
-  { path: 'valores-mercado', component: ValorMercadoComponent},
+  { path: 'ativos-financeiros', component: AtivoFinanceiroComponent },
+  { path: 'movimentacoes', component: MovimentacaoComponent },
+  { path: 'valores-mercado', component: ValorMercadoComponent },
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

@@ -8,10 +8,9 @@ describe('PosicaoComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [PosicaoComponent]
-    })
-    .compileComponents();
-    
+      declarations: [PosicaoComponent],
+    }).compileComponents();
+
     fixture = TestBed.createComponent(PosicaoComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

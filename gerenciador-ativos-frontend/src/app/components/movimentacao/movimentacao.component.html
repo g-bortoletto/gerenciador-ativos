@@ -1,43 +1,53 @@
-<div class="container" >
-	<table class="table">
-	
-		<thead class="thead-dark">
-			<tr>
-				<th>NOME ATIVO</th>
-				<th>TIPO ATIVO</th>
-				<th>QUANTIDADE</th>
-				<th>VALOR</th>
-				<th>TIPO</th>
-			</tr>
-		</thead>
-	
-		<tbody>
-			<tr *ngFor="let posicao of movimentacoes">
-				<td class="align-middle">{{ posicao.ativoFinanceiro.nome }}</td>
-				<td class="align-middle">{{ posicao.ativoFinanceiro.tipo }}</td>
-				<td class="align-middle">{{ posicao.quantidade}}</td>
-				<td class="align-middle">{{ posicao.valor | currency:'BRL'}}</td>
-				<td class="align-middle">{{ posicao.tipo}}</td>
-			</tr>
-	
-		</tbody>
-	</table>
-	<div class="row">
-		<div class="col">
-			<div class="mb-3">
-				<label for="dataInicioLabel" class="form-label">Data Início</label>
-				<input type="date" class="form-control" id="dataInicioLabel" placeholder="Data Início" [(ngModel)]="dataInicio">
-			</div>
-		</div>
-		<div class="col">
-			<div class="mb-3">
-				<label for="dataFimLabel" class="form-label">Data Fim</label>
-				<input type="datetime-local" class="form-control" id="dataFimLabel" placeholder="Data Fim" [(ngModel)]="dataFim">
-			</div>
-		</div>
-	</div>
-	
-	<div class="mb-3">
-		<button class="btn btn-primary">Consultar Movimentações</button>
-	</div>
-	</div>
+<div class="container">
+  <table class="table">
+    <thead class="thead-dark">
+      <tr>
+        <th>NOME ATIVO</th>
+        <th>TIPO ATIVO</th>
+        <th>QUANTIDADE</th>
+        <th>VALOR</th>
+        <th>TIPO</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr *ngFor="let posicao of movimentacoes">
+        <td class="align-middle">{{ posicao.ativoFinanceiro.nome }}</td>
+        <td class="align-middle">{{ posicao.ativoFinanceiro.tipo }}</td>
+        <td class="align-middle">{{ posicao.quantidade }}</td>
+        <td class="align-middle">{{ posicao.valor | currency : "BRL" }}</td>
+        <td class="align-middle">{{ posicao.tipo }}</td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="row">
+    <div class="col">
+      <div class="mb-3">
+        <label for="dataInicioLabel" class="form-label">Data Início</label>
+        <input
+          type="date"
+          class="form-control"
+          id="dataInicioLabel"
+          placeholder="Data Início"
+          [(ngModel)]="dataInicio"
+        />
+      </div>
+    </div>
+    <div class="col">
+      <div class="mb-3">
+        <label for="dataFimLabel" class="form-label">Data Fim</label>
+        <input
+          type="datetime-local"
+          class="form-control"
+          id="dataFimLabel"
+          placeholder="Data Fim"
+          [(ngModel)]="dataFim"
+        />
+      </div>
+    </div>
+  </div>
+
+  <div class="mb-3">
+    <button class="btn btn-primary">Consultar Movimentações</button>
+  </div>
+</div>

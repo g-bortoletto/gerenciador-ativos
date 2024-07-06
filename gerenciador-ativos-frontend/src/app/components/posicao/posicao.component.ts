@@ -5,11 +5,9 @@ import { Posicao } from '../../common/posicao';
 @Component({
   selector: 'app-posicao',
   templateUrl: './posicao.component.html',
-  styleUrl: './posicao.component.css'
+  styleUrl: './posicao.component.css',
 })
-
 export class PosicaoComponent {
-
   public dataPosicao: string = new Date().toISOString();
   public posicoes: Posicao[] = [];
 
@@ -21,10 +19,12 @@ export class PosicaoComponent {
 
   consultarPosicoes(): void {
     this.contaCorrenteService.consultarPosicoes(this.dataPosicao).subscribe({
-      next: response => { this.posicoes = response; console.log(response) },
-      error: response => console.error(response),
-      complete: () => console.log(this.posicoes)
-    })
+      next: (response) => {
+        this.posicoes = response;
+        console.log(response);
+      },
+      error: (response) => console.error(response),
+      complete: () => console.log(this.posicoes),
+    });
   }
-
 }

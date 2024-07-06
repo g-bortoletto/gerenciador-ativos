@@ -1,37 +1,76 @@
 <div class="accordion" id="accordionExample">
   <div class="accordion-item">
     <h2 class="accordion-header">
-      <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne"
-        aria-expanded="true" aria-controls="collapseOne">
+      <button
+        class="accordion-button"
+        type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#collapseOne"
+        aria-expanded="true"
+        aria-controls="collapseOne"
+      >
         Incluir
       </button>
     </h2>
-    <div id="collapseOne" class="accordion-collapse collapse show" data-bs-parent="#accordionExample">
+    <div
+      id="collapseOne"
+      class="accordion-collapse collapse show"
+      data-bs-parent="#accordionExample"
+    >
       <div class="accordion-body">
         <form class="mt-3 mb-3">
           <div class="mb-3">
             <label for="nome-ativo-financeiro" class="form-label">Nome</label>
-            <input type="text" class="form-control" id="nome-ativo-financeiro" [(ngModel)]="ativoFinanceiro.nome"
-              [ngModelOptions]="{standalone: true}">
+            <input
+              type="text"
+              class="form-control"
+              id="nome-ativo-financeiro"
+              [(ngModel)]="ativoFinanceiro.nome"
+              [ngModelOptions]="{ standalone: true }"
+            />
           </div>
-          <select class="form-select" aria-label="Tipo de Ativo Financeiro" [(ngModel)]="ativoFinanceiro.tipo"
-            [ngModelOptions]="{standalone: true}">
+          <select
+            class="form-select"
+            aria-label="Tipo de Ativo Financeiro"
+            [(ngModel)]="ativoFinanceiro.tipo"
+            [ngModelOptions]="{ standalone: true }"
+          >
             <option value="RV">Renda Variável</option>
             <option value="RF">Renda Fixa</option>
             <option value="FUNDO">Fundo</option>
           </select>
           <div class="mb-3">
-            <label for="data-emissao-ativo-financeiro" class="form-label">Data de Emissão</label>
-            <input type="datetime-local" class="form-control" id="data-emissao-ativo-financeiro"
-              [(ngModel)]="ativoFinanceiro.dataEmissao" [ngModelOptions]="{standalone: true}">
+            <label for="data-emissao-ativo-financeiro" class="form-label"
+              >Data de Emissão</label
+            >
+            <input
+              type="datetime-local"
+              class="form-control"
+              id="data-emissao-ativo-financeiro"
+              [(ngModel)]="ativoFinanceiro.dataEmissao"
+              [ngModelOptions]="{ standalone: true }"
+            />
           </div>
           <div class="mb-3">
-            <label for="data-vencimento-ativo-financeiro" class="form-label">Data de Vencimento</label>
-            <input type="datetime-local" class="form-control" id="data-vencimento-ativo-financeiro"
-              [(ngModel)]="ativoFinanceiro.dataVencimento" [ngModelOptions]="{standalone: true}">
+            <label for="data-vencimento-ativo-financeiro" class="form-label"
+              >Data de Vencimento</label
+            >
+            <input
+              type="datetime-local"
+              class="form-control"
+              id="data-vencimento-ativo-financeiro"
+              [(ngModel)]="ativoFinanceiro.dataVencimento"
+              [ngModelOptions]="{ standalone: true }"
+            />
           </div>
           <div class="d-grid gap-2 col-6 mx-auto">
-            <button type="submit" class="btn btn-primary" (click)="incluirAtivoFinanceiro()">Incluir</button>
+            <button
+              type="submit"
+              class="btn btn-primary"
+              (click)="incluirAtivoFinanceiro()"
+            >
+              Incluir
+            </button>
           </div>
         </form>
       </div>
@@ -39,46 +78,99 @@
   </div>
   <div class="accordion-item">
     <h2 class="accordion-header">
-      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo"
-        aria-expanded="false" aria-controls="collapseTwo" (click)="consultarAtivosFinanceiros()">
+      <button
+        class="accordion-button collapsed"
+        type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#collapseTwo"
+        aria-expanded="false"
+        aria-controls="collapseTwo"
+        (click)="consultarAtivosFinanceiros()"
+      >
         Editar
       </button>
     </h2>
-    <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+    <div
+      id="collapseTwo"
+      class="accordion-collapse collapse"
+      data-bs-parent="#accordionExample"
+    >
       <div class="accordion-body">
-        <select class="form-select" aria-label="Editar Ativo Financeiro" [(ngModel)]="ativoFinanceiro"
-          [ngModelOptions]="{standalone: true}">
-          <option *ngFor="let ativo of listaAtivosFinanceiros" [ngValue]="ativo">
+        <select
+          class="form-select"
+          aria-label="Editar Ativo Financeiro"
+          [(ngModel)]="ativoFinanceiro"
+          [ngModelOptions]="{ standalone: true }"
+        >
+          <option
+            *ngFor="let ativo of listaAtivosFinanceiros"
+            [ngValue]="ativo"
+          >
             {{ ativo.nome }}
           </option>
         </select>
         <div class="d-grid gap-2 col-6 mx-auto">
-          <button type="submit" class="btn btn-primary" (click)="mostrarEdicao = true">Editar</button>
+          <button
+            type="submit"
+            class="btn btn-primary"
+            (click)="mostrarEdicao = true"
+          >
+            Editar
+          </button>
         </div>
         <form class="mt-3 mb-3" *ngIf="mostrarEdicao">
           <div class="mb-3">
             <label for="nome-ativo-financeiro" class="form-label">Nome</label>
-            <input type="text" class="form-control" id="nome-ativo-financeiro" [(ngModel)]="ativoFinanceiro.nome"
-              [ngModelOptions]="{standalone: true}">
+            <input
+              type="text"
+              class="form-control"
+              id="nome-ativo-financeiro"
+              [(ngModel)]="ativoFinanceiro.nome"
+              [ngModelOptions]="{ standalone: true }"
+            />
           </div>
-          <select class="form-select" aria-label="Tipo de Ativo Financeiro" [(ngModel)]="ativoFinanceiro.tipo"
-            [ngModelOptions]="{standalone: true}">
+          <select
+            class="form-select"
+            aria-label="Tipo de Ativo Financeiro"
+            [(ngModel)]="ativoFinanceiro.tipo"
+            [ngModelOptions]="{ standalone: true }"
+          >
             <option value="RV">Renda Variável</option>
             <option value="RF">Renda Fixa</option>
             <option value="FUNDO">Fundo</option>
           </select>
           <div class="mb-3">
-            <label for="data-emissao-ativo-financeiro" class="form-label">Data de Emissão</label>
-            <input type="datetime-local" class="form-control" id="data-emissao-ativo-financeiro"
-              [(ngModel)]="ativoFinanceiro.dataEmissao" [ngModelOptions]="{standalone: true}">
+            <label for="data-emissao-ativo-financeiro" class="form-label"
+              >Data de Emissão</label
+            >
+            <input
+              type="datetime-local"
+              class="form-control"
+              id="data-emissao-ativo-financeiro"
+              [(ngModel)]="ativoFinanceiro.dataEmissao"
+              [ngModelOptions]="{ standalone: true }"
+            />
           </div>
           <div class="mb-3">
-            <label for="data-vencimento-ativo-financeiro" class="form-label">Data de Vencimento</label>
-            <input type="datetime-local" class="form-control" id="data-vencimento-ativo-financeiro"
-              [(ngModel)]="ativoFinanceiro.dataVencimento" [ngModelOptions]="{standalone: true}">
+            <label for="data-vencimento-ativo-financeiro" class="form-label"
+              >Data de Vencimento</label
+            >
+            <input
+              type="datetime-local"
+              class="form-control"
+              id="data-vencimento-ativo-financeiro"
+              [(ngModel)]="ativoFinanceiro.dataVencimento"
+              [ngModelOptions]="{ standalone: true }"
+            />
           </div>
           <div class="d-grid gap-2 col-6 mx-auto">
-            <button type="submit" class="btn btn-primary" (click)="editarAtivoFinanceiro()">OK</button>
+            <button
+              type="submit"
+              class="btn btn-primary"
+              (click)="editarAtivoFinanceiro()"
+            >
+              OK
+            </button>
           </div>
         </form>
       </div>
@@ -86,12 +178,22 @@
   </div>
   <div class="accordion-item">
     <h2 class="accordion-header">
-      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree"
-        aria-expanded="false" aria-controls="collapseThree">
+      <button
+        class="accordion-button collapsed"
+        type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#collapseThree"
+        aria-expanded="false"
+        aria-controls="collapseThree"
+      >
         Consultar
       </button>
     </h2>
-    <div id="collapseThree" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+    <div
+      id="collapseThree"
+      class="accordion-collapse collapse"
+      data-bs-parent="#accordionExample"
+    >
       <div class="accordion-body">
         <table class="table">
           <thead class="thead-dark">
@@ -110,33 +212,61 @@
               <td class="align-middle">{{ ativo.dataEmissao }}</td>
               <td class="align-middle">{{ ativo.dataVencimento }}</td>
             </tr>
-
           </tbody>
         </table>
         <div class="d-grid gap-2 col-6 mx-auto">
-          <button type="submit" class="btn btn-primary" (click)="consultarAtivosFinanceiros()">Realizar
-            consulta</button>
+          <button
+            type="submit"
+            class="btn btn-primary"
+            (click)="consultarAtivosFinanceiros()"
+          >
+            Realizar consulta
+          </button>
         </div>
       </div>
     </div>
   </div>
   <div class="accordion-item">
     <h2 class="accordion-header">
-      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour"
-        aria-expanded="false" aria-controls="collapseFour" (click)="consultarAtivosFinanceiros()">
+      <button
+        class="accordion-button collapsed"
+        type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#collapseFour"
+        aria-expanded="false"
+        aria-controls="collapseFour"
+        (click)="consultarAtivosFinanceiros()"
+      >
         Remover
       </button>
     </h2>
-    <div id="collapseFour" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+    <div
+      id="collapseFour"
+      class="accordion-collapse collapse"
+      data-bs-parent="#accordionExample"
+    >
       <div class="accordion-body">
-        <select class="form-select" aria-label="Editar Ativo Financeiro" [(ngModel)]="ativoFinanceiro"
-          [ngModelOptions]="{standalone: true}">
-          <option *ngFor="let ativo of listaAtivosFinanceiros" [ngValue]="ativo">
+        <select
+          class="form-select"
+          aria-label="Editar Ativo Financeiro"
+          [(ngModel)]="ativoFinanceiro"
+          [ngModelOptions]="{ standalone: true }"
+        >
+          <option
+            *ngFor="let ativo of listaAtivosFinanceiros"
+            [ngValue]="ativo"
+          >
             {{ ativo.nome }}
           </option>
         </select>
         <div class="d-grid gap-2 col-6 mx-auto">
-          <button type="submit" class="btn btn-primary" (click)="removerAtivoFinanceiro()">Remover</button>
+          <button
+            type="submit"
+            class="btn btn-primary"
+            (click)="removerAtivoFinanceiro()"
+          >
+            Remover
+          </button>
         </div>
       </div>
     </div>

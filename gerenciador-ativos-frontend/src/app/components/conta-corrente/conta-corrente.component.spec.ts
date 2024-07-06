@@ -8,10 +8,9 @@ describe('ContaCorrenteComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ContaCorrenteComponent]
-    })
-    .compileComponents();
-    
+      declarations: [ContaCorrenteComponent],
+    }).compileComponents();
+
     fixture = TestBed.createComponent(ContaCorrenteComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

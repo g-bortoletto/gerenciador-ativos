@@ -8,10 +8,9 @@ describe('MovimentacaoComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [MovimentacaoComponent]
-    })
-    .compileComponents();
-    
+      declarations: [MovimentacaoComponent],
+    }).compileComponents();
+
     fixture = TestBed.createComponent(MovimentacaoComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

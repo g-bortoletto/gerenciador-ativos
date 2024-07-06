@@ -1,32 +1,45 @@
 <div class="container">
-    <table class="table">
+  <table class="table">
+    <thead class="thead-dark">
+      <tr>
+        <th>NOME</th>
+        <th>TIPO</th>
+        <th>QUANTIDADE TOTAL</th>
+        <th>VALOR MERCADO</th>
+        <th>RENDIMENTO</th>
+        <th>LUCRO</th>
+      </tr>
+    </thead>
 
-        <thead class="thead-dark">
-            <tr>
-                <th>NOME</th>
-                <th>TIPO</th>
-                <th>QUANTIDADE TOTAL</th>
-                <th>VALOR MERCADO</th>
-                <th>RENDIMENTO</th>
-                <th>LUCRO</th>
-            </tr>
-        </thead>
-
-        <tbody>
-            <tr *ngFor="let posicao of posicoes">
-                <td class="align-middle">{{ posicao.ativoFinanceiro.nome }}</td>
-                <td class="align-middle">{{ posicao.ativoFinanceiro.tipo }}</td>
-                <td class="align-middle">{{ posicao.quantidadeTotal}}</td>
-                <td class="align-middle">{{ posicao.valorMercadoTotal | currency:'BRL'}}</td>
-                <td class="align-middle">{{ posicao.rendimento}}</td>
-                <td class="align-middle">{{ posicao.lucro}}</td>
-            </tr>
-
-        </tbody>
-    </table>
-    <div class="input-group mb-3">
-        <input type="datetime-local" class="form-control" placeholder="atualizar-posicoes" aria-label="atualizar-posicoes"
-            aria-describedby="btn-atualizar-posicoes" [(ngModel)]="dataPosicao">
-        <button class="btn btn-outline-secondary" type="button" id="btn-atualizar-posicoes" (click)="consultarPosicoes()">Atualizar</button>
-    </div>
+    <tbody>
+      <tr *ngFor="let posicao of posicoes">
+        <td class="align-middle">{{ posicao.ativoFinanceiro.nome }}</td>
+        <td class="align-middle">{{ posicao.ativoFinanceiro.tipo }}</td>
+        <td class="align-middle">{{ posicao.quantidadeTotal }}</td>
+        <td class="align-middle">
+          {{ posicao.valorMercadoTotal | currency: "BRL" }}
+        </td>
+        <td class="align-middle">{{ posicao.rendimento }}</td>
+        <td class="align-middle">{{ posicao.lucro }}</td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="input-group mb-3">
+    <input
+      type="datetime-local"
+      class="form-control"
+      placeholder="atualizar-posicoes"
+      aria-label="atualizar-posicoes"
+      aria-describedby="btn-atualizar-posicoes"
+      [(ngModel)]="dataPosicao"
+    />
+    <button
+      class="btn btn-outline-secondary"
+      type="button"
+      id="btn-atualizar-posicoes"
+      (click)="consultarPosicoes()"
+    >
+      Atualizar
+    </button>
+  </div>
 </div>
