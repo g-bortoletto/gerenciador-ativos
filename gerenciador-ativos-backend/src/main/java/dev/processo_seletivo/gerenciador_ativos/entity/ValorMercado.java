@@ -3,6 +3,8 @@ package dev.processo_seletivo.gerenciador_ativos.entity;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.Data;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 import org.jetbrains.annotations.NotNull;
 
 import java.math.BigDecimal;
@@ -18,6 +20,7 @@ public class ValorMercado {
     Long id;
 
     @ManyToOne
+    @OnDelete(action = OnDeleteAction.CASCADE)
     @JsonBackReference
     @JoinColumn(
         name = "ativo_financeiro_id",

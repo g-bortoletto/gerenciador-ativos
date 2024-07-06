@@ -3,6 +3,8 @@ package dev.processo_seletivo.gerenciador_ativos.entity;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.Data;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 import org.jetbrains.annotations.NotNull;
 
 import java.math.BigDecimal;
@@ -22,6 +24,7 @@ public class Movimentacao {
     private TipoMovimentacao tipo;
 
     @ManyToOne
+    @OnDelete(action = OnDeleteAction.CASCADE)
     @JsonBackReference
     @JoinColumn(
         name = "conta_corrente_id",
@@ -30,6 +33,7 @@ public class Movimentacao {
     private ContaCorrente contaCorrente;
 
     @ManyToOne
+    @OnDelete(action = OnDeleteAction.CASCADE)
     @JsonBackReference
     @JoinColumn(
         name = "ativo_financeiro_id",
