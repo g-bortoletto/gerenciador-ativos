@@ -1,30 +1,6 @@
-# Processo Seletivo - Guilherme Bortoletto
+# Gerenciador de Ativos Financeiros
 
-## Gerenciador de Ativos Financeiros
-
-Um conhecido seu está montando uma startup com uma solução de finanças pessoais e te pediu uma ajuda com o desenvolvimento. 
-
-A aplicação tem como propósito ajudar pessoas a gerirem seus ativos financeiros e acompanharem o crescimento de seu patrimônio e saldo em sua conta corrente.
-
-## Repositório
-
-O branch main é o mais atualizado, depois foram criados branches com as versões de cada dia do projeto, desde o dia da entrega.
-
-## Comentários iniciais
-
-Acredito que consegui fazer tudo que pede no nível 1 e a maior parte das coisas que pede no nível dois pensando no backend. O frontend é onde tenho menos experiência, apesar de já ter feito alguns cursos, portanto acabei enroscando um pouco lá.
-
-Como eu já trabalho, eu tive pouco tempo pra mexer no projeto, e a minha cidade inteira ficou sem internet no sábado, pra ajudar...
-
-Não tive tempo de realizar testes no frontend e não sei se vou conseguir finalizar todas as funcionalidades dele no prazo, mas espero que o que eu entregar seja suficiente pra vocês me avaliarem e tomarem uma decisão. 🥲
-
-## Linguagem
-
-Escolhi o Java 17 (Spring) como linguagem de programação do backend e TypeScript (Angular) como linguagem do frontend, por serem linguagens que sempre tive interesse em aprender e me aprofundar, além de serem tecnologias utilizadas na Maps.
-
-Como sistema de build eu escolhi o Maven, pois testei o Gradle, que diz ser um sistema mais robusto, e ele demorava mais que o dobro pra compilar um projeto vazio. Como precisava de agilidade no processo, decidi utilizar a ferramenta mais simples.
-
-O banco de dados escolhido foi o H2, pois ele é facilmente embarcado utilizando o Spring e tem uma abordagem relacional, que eu, pessoalmente, prefiro.
+Essa aplicação tem como propósito ajudar pessoas a gerirem seus ativos financeiros e acompanharem o crescimento de seu patrimônio e saldo em sua conta corrente.
 
 ## Erros e status codes
 
@@ -66,21 +42,13 @@ Esse é um modelo que representa as entidades do banco de dados e como elas inte
 ![image](https://github.com/g-bortoletto/gerenciador-ativos/assets/20934524/66720594-e8f2-4b2a-9974-7f926f3486c5)
 
 
-Acredito que o programa contempla tudo que foi pedido no nível 1 e algumas coisas do nível 2. Considerei datas desde o início, tanto saldo como posição são calculados a partir de datas, não são dados fixos guardados no banco de dados.
+Considerei datas desde o início, tanto saldo como posição são calculados a partir de datas, não são dados fixos guardados no banco de dados.
 
 Existem três *controllers*, que gerenciam APIs de conta corrente, lançamentos e ativos financeiros. Para fornecer os dados desses *controllers*, existem cinco serviços. Gostaria de ter separado melhor as responsabilidades entre esses serviços, mas acabei ficando sem tempo.
 
 ## Testes
 
 As funcionalidades do programa foram testadas através de testes unitários, que utilizam mock para evitar interação com o banco de dados, mas também através de testes de integração, que vão desde a requisição HTTP até o banco de dados, realizando o fluxo completo do programa.
-
-## Comentários
-
-Olhando pra trás, se pudesse voltar, provavelmente não escolheria uma linguagem que não domino para fazer o projeto. Estou bem mais acostumado com tecnologias .NET, que, apesar de parecidas, têm detalhes bastante descasados. Também não tenho uma grande experiência com desenvolvimento web e os padrões utilizados, mas foi divertido aumentar essa familiaridade.
-
-A lógica de programação é tranquila, nunca tive muito problema com isso, mas os frameworks em si são complicados e têm muitos detalhes. Gostaria de ter tido mais tempo para aperfeiçoar o código, entender como é a performance dessas tecnologias e fazer muito mais testes.
-
-Também decidi usar o Hibernate, não sei se isso é utilizado aí na Maps ou não. Não sou o maior fã de ORMs, mas quis experimentar, já que foi o que o Spring recomendou.
 
 No geral, a experiência foi legal, provavelmente não vou conseguir entregar tudo o que é pedido, mas espero que consiga mostrar que consigo ser um programador competente, mesmo quando preciso aprender coisas novas e me virar.
 
